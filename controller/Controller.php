@@ -8,12 +8,23 @@
 			$this->model = new Model();
 		}
 		
-		public function invoke(){
+		public function invoke($from){
+			$types = $this->model->getData('TypeList');
+			$frontpage = true;
 			if(isset($_GET['type'])){
-			
+				exit('site under development');
+			}else if(isset($_GET['product'])){
+				exit('site under development');
 			}else{
-				$types = $this->model->getData('TypeList');
-				$products = $this->model->getData('AllProduct');
+				switch($from){
+				case 'about':
+				case 'contact':
+					$frontpage = false;
+					break;
+				default:
+					$products = $this->model->getData('AllProduct');
+					break;
+				}
 				include 'view/storefront.php';
 			}
 		}

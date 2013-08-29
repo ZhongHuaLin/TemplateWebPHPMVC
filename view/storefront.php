@@ -23,7 +23,7 @@
 				</div>
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="#">Home</a></li>
+						<li><a href="index.php">Home</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">TestDropdown<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<?php
@@ -35,8 +35,8 @@
 								?>
 							</ul>
 						</li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact Us</a></li>
+						<li><a href="About.php">About</a></li>
+						<li><a href="Contact.php">Contact Us</a></li>
 					</ul>
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 		<div class="container">
 			<div class="row" >
 				<?php
-					
+					if($frontpage){
 					foreach($products as $product){
 						echo '<div class="col-lg-4">';
 						echo '<h1>'.$product->getName().'</h1>';
@@ -60,7 +60,7 @@
 						echo '<p><a class="btn btn-primary" href="index.php?product='.$product->getName().'">More Info >></a></p>';
 						echo '<hr></div>';
 					}
-				
+					}
 				?>
 			</div>
 		</div>
@@ -73,5 +73,6 @@
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/DynNavBar.js"></script>
 	</body>
 </html>

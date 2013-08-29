@@ -1,13 +1,18 @@
 (function ($) {
-	
-	$.post('./getAllProductType.php', function(response){
-		if(response.status == "ERROR"){
-			console.log(response.message);
-		}else{
-			response.message.forEach(function(item){
-				$(".dropdown .dropdown-menu").append("<li><a href=" + item.name + ">" + item.name + "</a>" +  "</li>");
-			});
-		}
-	},"json");
 
+	// this function use to change the active class at the
+	// top navbar
+	var url = window.location.pathname;
+	var index = url.lastIndexOf('/');
+	var pagestring = url.substring(index+1);
+	if(pagestring == 'index.php'){
+		$('.nav li a').each(function(){
+			if($(this).text() == 'Home') $(this).parent().addClass("active");
+		});
+	}else {
+		console.log(pagestring.split('.')[0]);
+		$('.nav li a').each(function(){
+			if($(this).text().split(' ')[0] == pagestring.split('.')[0]) $(this).parent().addClass("active");
+		});
+	}
 } (jQuery));
