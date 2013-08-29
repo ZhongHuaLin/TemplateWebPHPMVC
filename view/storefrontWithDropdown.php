@@ -24,17 +24,19 @@
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.php">Home</a></li>
-						<li><a href="#">Products</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">TestDropdown<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<?php
+									
+									foreach($types as $type){
+										echo '<li><a href="index.php?type='.$type->getName().'">'.$type->getName().'</a></li>';
+									}
+								
+								?>
+							</ul>
+						</li>
 						<li><a href="About.php">About</a></li>
 						<li><a href="Contact.php">Contact Us</a></li>
-						<li>
-							<form class="navbar-form mycontainer-nav" role="search">
-								  <div class="form-group">
-										<input type="text" class="form-control" placeholder="Search">
-								  </div>
-								  <button type="submit" class="btn btn-default">Search</button>
-							</form>
-						</li>					
 					</ul>
 				</div>
 			</div>
