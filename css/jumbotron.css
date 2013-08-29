@@ -1,0 +1,18 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.Mynavbar-bottom{
+  margin-bottom: 0px;
+}
+
+.Mynavbar{
+	min-height: 35px;
+}
+
+.Mynavbar-text{
+	font-size: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px
+}
