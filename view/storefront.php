@@ -61,11 +61,11 @@
 			}
 			echo '</div>';
 			echo '</div>';
-		}
 		if($numPage > 1){
 			include_once('Pagination.php');
 			$pagin = new Pagination($this->ipp, $this->pageNum, $numPage);
 			$pagin->draw();
+		}
 		}
 		?>
 

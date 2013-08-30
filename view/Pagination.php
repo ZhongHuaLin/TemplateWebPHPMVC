@@ -13,7 +13,7 @@
 		function draw(){
 			echo '<div class="container">';
 			echo '<div class="row">';
-			echo '<ul class="pagination">';
+			echo '<ul class="pagination mypagination">';
 			if($this->pageNum != 1) echo '<li><a href="'.basename($_SERVER['PHP_SELF']).'?ipp='.$this->ipp.'&pageNum='.($this->pageNum-1).'">&laquo;</a></li>';
 			for($i=1;$i<=$this->numOfPage;$i++){
 				echo '<li';
