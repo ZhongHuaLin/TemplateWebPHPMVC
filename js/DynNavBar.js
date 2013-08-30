@@ -10,7 +10,6 @@
 			if($(this).text() == 'Home') $(this).parent().addClass("active");
 		});
 	}else {
-		console.log(pagestring.split('.')[0]);
 		$('.nav li a').each(function(){
 			if($(this).text().split(' ')[0] == pagestring.split('.')[0]) $(this).parent().addClass("active");
 		});

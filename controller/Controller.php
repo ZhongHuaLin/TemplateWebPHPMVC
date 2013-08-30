@@ -11,7 +11,7 @@
 		public function invoke($from){
 			$types = $this->model->getData('TypeList');
 			$frontpage = true;
-			if(isset($_GET['type'])){
+			if(isset($_GET['search'])){
 				exit('site under development');
 			}else if(isset($_GET['product'])){
 				exit('site under development');

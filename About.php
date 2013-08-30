@@ -1,6 +1,5 @@
 <?php
-	include_once('controller/Controller.php');
+	include_once('RunProgram.php');
 	
-	$controller = new Controller();
-	$controller->invoke('about');
+	runProgram('about');
 ?>
