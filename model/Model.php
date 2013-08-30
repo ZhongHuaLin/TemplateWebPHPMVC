@@ -5,6 +5,7 @@
 	
 	class Model{
 		private $database;
+		public $numChunk;
 		
 		function __construct(){
 			$this->database = new DataBase('localhost', 'root', '', 'data');
@@ -20,6 +21,16 @@
 				exit($result['message']);
 			}else{	
 				return $result['message'];
+			}
+		}
+		
+		public function getPartialData($dataType, $ipp, $pageNum){
+			switch ($dataType){
+				case 'PartialProduct':
+					return $this->getProducts($ipp, $pageNum);
+					break;
+				default :
+					break;
 			}
 		}
 		
@@ -59,8 +70,17 @@
 		}
 		*/
 		
-		//TODO: should return 6 recently added item.
+		//TODO: should return recently added items.
 		private function getRecentAdd(){}
+		
+		// Usage: use to get partial product list with item per page
+		//		  and page number
+		// Assume: ipp > 0, pageNum >= 1
+		private function getProducts($ipp, $pageNum){
+			$productlist = $this->getAllProduct();
+			$this->numChunk = ceil(sizeof($productlist)/$ipp);
+			return array_chunk($productlist, $ipp)[$pageNum-1];
+		}
 		
 		// Used to get all product.
 		// RETURN: array of all product inside

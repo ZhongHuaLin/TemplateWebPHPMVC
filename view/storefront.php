@@ -56,26 +56,17 @@
 				echo '<div class="col-lg-4">';
 				echo '<h1>'.$product->getName().'</h1>';
 				echo '<p>'.$product->getDescript().'</p>';
-				echo '<p><a class="btn btn-primary" href="index.php?product='.$product->getName().'">More Info >></a></p>';
+				echo '<p><a class="btn btn-primary" href="'.basename($_SERVER['PHP_SELF']).'?product='.$product->getName().'">More Info >></a></p>';
 				echo '<hr></div>';
 			}
 			echo '</div>';
 			echo '</div>';
 		}
+		
+			include_once('Pagination.php');
+			$pagin = new Pagination($this->ipp, $this->pageNum, $numPage);
+			$pagin->draw();
 		?>
-		<div class="container">
-			<div class="row">
-				<ul class="pagination">
-					<li><a href="#">&laquo;</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">&raquo;</a></li>
-				</ul>
-			</div>
-		</div>
 
 		<div class="navbar navbar-default navbar-fixed-bottom Mynavbar">
 			<div class="container">
