@@ -24,7 +24,9 @@
 				case 'contact':
 					break;
 				default:
-					$products = $this->model->getPartialData('PartialProduct', $this->ipp, $this->pageNum);
+					$result = $this->model->getPartialData('PartialProduct', $this->ipp, $this->pageNum);
+					if($result['status'] == 'ERROR') exit($result['status'].": ".$result['message']);
+					$products = $result['message'];
 					$numPage = $this->model->numChunk;
 					break;
 			}

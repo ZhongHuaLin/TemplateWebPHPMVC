@@ -16,12 +16,7 @@
 		//         if there is no error, return the message
 		public function runQuery($query){
 			$this->database->setQuery($query);
-			$result= $this->database->doQuery();
-			if($result['status'] == "ERROR"){
-				exit($result['message']);
-			}else{	
-				return $result['message'];
-			}
+			return $this->database->doQuery();
 		}
 		
 		public function getPartialData($dataType, $ipp, $pageNum){
@@ -30,6 +25,7 @@
 					return $this->getProducts($ipp, $pageNum);
 					break;
 				default :
+					return array('status'=>'ERROR', 'message'=>'NOT A SUPPORT OPERATION');
 					break;
 			}
 		}
@@ -51,7 +47,7 @@
 					return $this->getAllProduct();
 					break;
 				default:
-					exit("ERROR: NOT A SUPPORT OPERATION");
+					return array('status'=>'ERROR', 'message'=>'NOT A SUPPORT OPERATION');
 					break;
 			}
 		}
@@ -78,8 +74,14 @@
 		// Assume: ipp > 0, pageNum >= 1
 		private function getProducts($ipp, $pageNum){
 			$productlist = $this->getAllProduct();
-			$this->numChunk = ceil(sizeof($productlist)/$ipp);
-			return array_chunk($productlist, $ipp)[$pageNum-1];
+			if($productlist['status'] == "ERROR"){
+				return productlist;
+			}
+			$this->numChunk = ceil(sizeof($productlist['message'])/$ipp);
+			if($pageNum > $this->numChunk){
+				return array('status'=>'ERROR', 'message'=>'THE DATA YOU SEEKING IS NOT EXIST!!');
+			}
+			return array('status'=>'SUCCESS','message'=>array_chunk($productlist['message'], $ipp)[$pageNum-1]);
 		}
 		
 		// Used to get all product.
@@ -87,12 +89,15 @@
 		private function getAllProduct(){
 			$query = 'SELECT * FROM product';
 			$result = $this->runQuery($query);
+			if($result['status'] == "ERROR"){
+				return result;
+			}
 			$productlist = array();
-			foreach($result as $item){
+			foreach($result['message'] as $item){
 				$prod = new Product($item["id"], $item["name"],$item["type"],$item["description"]);
 				array_push($productlist, $prod);
 			}
-			return $productlist;
+			return array('status'=>'SUCCESS','message'=>$productlist);
 		}
 	}
 ?>
