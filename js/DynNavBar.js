@@ -5,7 +5,7 @@
 	var url = window.location.pathname;
 	var index = url.lastIndexOf('/');
 	var pagestring = url.substring(index+1);
-	if(pagestring == 'index.php'){
+	if(pagestring == 'index.php' || pagestring == ''){
 		$('.nav li a').each(function(){
 			if($(this).text() == 'Home') $(this).parent().addClass("active");
 		});

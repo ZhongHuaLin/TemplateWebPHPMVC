@@ -9,8 +9,7 @@
 		}
 		
 		public function invoke($from){
-			$types = $this->model->getData('TypeList');
-			$frontpage = true;
+			// $types = $this->model->getData('TypeList');
 			if(isset($_GET['search'])){
 				exit('site under development');
 			}else if(isset($_GET['product'])){
@@ -19,7 +18,6 @@
 				switch($from){
 				case 'about':
 				case 'contact':
-					$frontpage = false;
 					break;
 				default:
 					$products = $this->model->getData('AllProduct');

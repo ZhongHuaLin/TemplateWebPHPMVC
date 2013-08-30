@@ -47,19 +47,33 @@
 				<p><a class="btn btn-lg btn-primary" href="#">test button</a></p>
 			</div>
 		</div>
+		
+		<?php
+		if($from == 'home'){
+			echo '<div class="container">';
+			echo '<div class="row" >';
+			foreach($products as $product){
+				echo '<div class="col-lg-4">';
+				echo '<h1>'.$product->getName().'</h1>';
+				echo '<p>'.$product->getDescript().'</p>';
+				echo '<p><a class="btn btn-primary" href="index.php?product='.$product->getName().'">More Info >></a></p>';
+				echo '<hr></div>';
+			}
+			echo '</div>';
+			echo '</div>';
+		}
+		?>
 		<div class="container">
-			<div class="row" >
-				<?php
-					if($frontpage){
-					foreach($products as $product){
-						echo '<div class="col-lg-4">';
-						echo '<h1>'.$product->getName().'</h1>';
-						echo '<p>'.$product->getDescript().'</p>';
-						echo '<p><a class="btn btn-primary" href="index.php?product='.$product->getName().'">More Info >></a></p>';
-						echo '<hr></div>';
-					}
-					}
-				?>
+			<div class="row">
+				<ul class="pagination">
+					<li><a href="#">&laquo;</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">&raquo;</a></li>
+				</ul>
 			</div>
 		</div>
 

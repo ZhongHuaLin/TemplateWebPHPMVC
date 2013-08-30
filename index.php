@@ -1,5 +1,5 @@
 <?php
 	include_once("RunProgram.php");
 	
-	runProgram('');
+	runProgram('home');
 ?>

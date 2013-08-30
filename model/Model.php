@@ -27,9 +27,12 @@
 		// RETURN: array of objects
 		public function getData($dataType){
 			switch($dataType){
+			/*	// this is a case to get all list of type which
+				// is no longer useful for this web app
 				case 'TypeList':
 					return $this->getTypeList();
-					break;
+					break;	
+			*/
 				case 'RecentAdd':
 					return $this->getRecentAdd();
 					break;
@@ -42,6 +45,8 @@
 			}
 		}
 		
+		// No longer useful since the a product does not have any type.
+		/*
 		private function getTypeList(){
 			$query = 'SELECT * FROM typename';
 			$result = $this->runQuery($query);
@@ -52,12 +57,12 @@
 			}
 			return $typelist;
 		}
+		*/
 		
+		//TODO: should return 6 recently added item.
 		private function getRecentAdd(){}
 		
-		// this function is for test purpose.
-		// with a really large database. this is not a good choice
-		// better to use getRecentAdd()
+		// Used to get all product.
 		// RETURN: array of all product inside
 		private function getAllProduct(){
 			$query = 'SELECT * FROM product';

@@ -5,7 +5,7 @@
 	function runProgram($startpage){
 	
 		$controller = new Controller();
-		$controller->invoke('');
+		$controller->invoke($startpage);
 	
 	}
 ?>
