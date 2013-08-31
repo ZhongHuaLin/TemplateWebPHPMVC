@@ -1,5 +1,8 @@
 <?php
-	class Pagination{
+
+	include_once('Builder.php');
+
+	class PaginationBuilder implements Builder{
 		private $ipp;
 		private $numOfPage;
 		private $pageNum;
@@ -10,7 +13,7 @@
 			$this->numOfPage = $numOfPage;
 		}
 		
-		function draw(){
+		public function draw(){
 			echo '<div class="container">';
 			echo '<div class="row">';
 			echo '<ul class="pagination mypagination">';

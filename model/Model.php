@@ -11,6 +11,17 @@
 			$this->database = new DataBase('localhost', 'root', '', 'data');
 		}
 		
+		// Function overloading, when getData() function called
+		// it will go directly to this function.
+		function __call($name, $arguments){
+			if($name == 'getData'){
+				if(sizeof($arguments)== 3){
+					return $this->getPartialData($arguments[0],$arguments[1],$arguments[2]);
+				}
+				return $this->getFullData($arguments[0]);
+			}
+		}
+		
 		// Usage: Use to run a Query
 		// Output: if there is an error, exit the program
 		//         if there is no error, return the message
@@ -32,7 +43,7 @@
 		
 		// Usage: Use to get data from model
 		// RETURN: array of objects
-		public function getData($dataType){
+		public function getFullData($dataType){
 			switch($dataType){
 			/*	// this is a case to get all list of type which
 				// is no longer useful for this web app

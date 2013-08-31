@@ -49,21 +49,12 @@
 		</div>
 		
 		<?php
+		include_once('BuilderFactory.php');
 		if($from == 'home'){
-			echo '<div class="container">';
-			echo '<div class="row" >';
-			foreach($products as $product){
-				echo '<div class="col-lg-4">';
-				echo '<h1>'.$product->getName().'</h1>';
-				echo '<p>'.$product->getDescript().'</p>';
-				echo '<p><a class="btn btn-primary" href="'.basename($_SERVER['PHP_SELF']).'?product='.$product->getName().'">More Info >></a></p>';
-				echo '<hr></div>';
-			}
-			echo '</div>';
-			echo '</div>';
+			$productlist = BuilderFactory::create('productlist',array('plist'=>$products));
+			$productlist->draw();
 		if($numPage > 1){
-			include_once('Pagination.php');
-			$pagin = new Pagination($this->ipp, $this->pageNum, $numPage);
+			$pagin = BuilderFactory::create('pagination',array('ipp'=>$this->ipp, 'pageNum'=>$this->pageNum, 'numOfPage'=>$numPage));
 			$pagin->draw();
 		}
 		}
