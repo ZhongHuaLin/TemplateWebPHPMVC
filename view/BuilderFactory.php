@@ -12,7 +12,7 @@
 					return new PaginationBuilder($arguments['ipp'],$arguments['pageNum'],$arguments['numOfPage']);
 					break;
 				case 'productlist':
-					return new ProductListBuilder($arguments['plist']);
+					return new ProductListBuilder($arguments['plist'],$arguments['vertical']);
 					break;
 				default:
 					break;

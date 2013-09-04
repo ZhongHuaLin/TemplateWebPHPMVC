@@ -30,7 +30,7 @@
 						<li>
 							<form class="navbar-form mycontainer-nav" action="Search.php" method="get" role="search">
 								  <div class="form-group">
-										<input type="text" name="search" class="form-control" placeholder="Search">
+										<input type="text" name="search" class="form-control" placeholder="Product ID, Size, or Name">
 								  </div>
 								  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
 							</form>
@@ -51,7 +51,7 @@
 		<?php
 		include_once('BuilderFactory.php');
 		if($from == 'home'){
-			$productlist = BuilderFactory::create('productlist',array('plist'=>$products));
+			$productlist = BuilderFactory::create('productlist',array('plist'=>$products, 'vertical'=>false));
 			$productlist->draw();
 		if($numPage > 1){
 			$pagin = BuilderFactory::create('pagination',array('ipp'=>$this->ipp, 'pageNum'=>$this->pageNum, 'numOfPage'=>$numPage));

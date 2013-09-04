@@ -7,6 +7,7 @@
 		private $default_pageNum;
 		private $ipp;
 		private $pageNum;
+		private $search;
 		
 		function __construct(){
 			$this->model = new Model();
@@ -16,15 +17,16 @@
 		
 		public function invoke($from){
 			// $types = $this->model->getData('TypeList');
-			$this->ipp = (isset($_GET['ipp']))? (int)$_GET['ipp'] : $this->default_ipp;
-			$this->pageNum = (isset($_GET['pageNum']))? (int)$_GET['pageNum'] : $this->default_pageNum;
+			$this->ipp = (isset($_GET['ipp']) && is_numeric($_GET['ipp']))? (int)$_GET['ipp'] : $this->default_ipp;
+			$this->pageNum = (isset($_GET['pageNum']) && is_numeric($_GET['pageNum']))? (int)$_GET['pageNum'] : $this->default_pageNum;
+			$this->search = (isset($_GET['search']))? $_GET['search'] : null;
 			
 			switch($from){
 				case 'about':
 				case 'contact':
 					break;
 				default:
-					$result = $this->model->getData('PartialProduct', $this->ipp, $this->pageNum);
+					$result = $this->model->getData('PartialProductSearch', $this->ipp, $this->pageNum, $this->search);
 					if($result['status'] == 'ERROR') exit($result['status'].": ".$result['message']);
 					$products = $result['message'];
 					$numPage = $this->model->numChunk;

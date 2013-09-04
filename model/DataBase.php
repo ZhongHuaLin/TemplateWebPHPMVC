@@ -4,7 +4,7 @@
 		private $uname;
 		private $pw;
 		private $db;
-		private $query;
+		private $stmt;
 		private $connection;
 		
 		function __construct($hostaddress, $username, $password, $dbname){
@@ -12,37 +12,45 @@
 			$this->uname = $username;
 			$this->pw = $password;
 			$this->db = $dbname;
-			$this->connection = mysqli_connect($this->host, $this->uname, $this->pw, $this->db);
-			if (mysqli_connect_errno($this->connection))
-			{
-				exit("Failed to connect to MySQL: " . mysqli_connect_error());
+			try{
+				$this->connection = new PDO('mysql:host='.$this->host.';dbname='.$this->db, $this->uname, $this->pw);
+				$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			}catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
 			}
 		}
 		
 		public function setQuery($Query){
-			$this->query = $Query;
+			try{
+				$this->stmt = $this->connection->prepare($Query);
+			//exit(var_dump($Query));
+			}catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+			}
 		}
 		
 		// function use to run query.
 		// NEED: hostname, username, password, database name, query
-		public function doQuery(){
-			$result = mysqli_query($this->connection, $this->query);
-			if(!$result){
+		public function doQuery($arr){
+			$re = $this->stmt->execute($arr);
+			if(!$re){
 				return array('status'=>'ERROR', 'message'=>'ERROR in the DB'.mysqli_error($connection));
-			}else if(mysqli_num_rows($result) > 0){
+			}else{
 				$resultlist = array();
-				while($row = mysqli_fetch_array($result)){
+				while($row = $this->stmt->fetch(PDO::FETCH_ASSOC)){
 					array_push($resultlist, $row);
 				}
-				return array('status'=>'SUCCESS', 'message'=>$resultlist);
-			}else{
-				$success = false;
-				return array('status'=>'ERROR', 'message'=>'Nothing inside typename table');
+				if(sizeof($resultlist) > 0)
+					return array('status'=>'SUCCESS', 'message'=>$resultlist);
+				else
+					return array('status'=>'ERROR', 'message'=>'Cannot find the data you look for');
 			}
 		}
 		
 		function __destruct(){
-			mysqli_close($this->connection);
+			$this->connection = null;
 		}
 	}
 ?>

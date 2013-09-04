@@ -5,6 +5,12 @@
 	
 	class Model{
 		private $database;
+		private $db_hostname;
+		private $db_username;
+		private $db_password;
+		private $db_name;
+		private $db_tb_name;
+		private $db_tb_atr_name;
 		public $numChunk;
 		
 		function __construct(){
@@ -15,8 +21,8 @@
 		// it will go directly to this function.
 		function __call($name, $arguments){
 			if($name == 'getData'){
-				if(sizeof($arguments)== 3){
-					return $this->getPartialData($arguments[0],$arguments[1],$arguments[2]);
+				if(sizeof($arguments)== 4){
+					return $this->getPartialData($arguments[0],$arguments[1],$arguments[2],$arguments[3]);
 				}
 				return $this->getFullData($arguments[0]);
 			}
@@ -25,16 +31,18 @@
 		// Usage: Use to run a Query
 		// Output: if there is an error, exit the program
 		//         if there is no error, return the message
-		public function runQuery($query){
+		public function runQuery($query, $arr){
 			$this->database->setQuery($query);
-			return $this->database->doQuery();
+			return $this->database->doQuery($arr);
 		}
 		
-		public function getPartialData($dataType, $ipp, $pageNum){
+		public function getPartialData($dataType, $ipp, $pageNum, $search){
 			switch ($dataType){
 				case 'PartialProduct':
 					return $this->getProducts($ipp, $pageNum);
 					break;
+				case 'PartialProductSearch':
+					return $this->search($ipp, $pageNum, $search);
 				default :
 					return array('status'=>'ERROR', 'message'=>'NOT A SUPPORT OPERATION');
 					break;
@@ -77,6 +85,14 @@
 		}
 		*/
 		
+		private function search($ipp, $pageNum, $search){
+			$query = "SELECT * FROM product WHERE id like :search OR name like :search
+						OR type like :search OR description like :search";
+	
+			$arr = array(':search'=>'%'.$search.'%');
+			return $this->getProductsBySearch($ipp, $pageNum, $query, $arr);
+		}
+		
 		//TODO: should return recently added items.
 		private function getRecentAdd(){}
 		
@@ -84,24 +100,34 @@
 		//		  and page number
 		// Assume: ipp > 0, pageNum >= 1
 		private function getProducts($ipp, $pageNum){
-			$productlist = $this->getAllProduct();
-			if($productlist['status'] == "ERROR"){
-				return productlist;
-			}
-			$this->numChunk = ceil(sizeof($productlist['message'])/$ipp);
-			if($pageNum > $this->numChunk){
-				return array('status'=>'ERROR', 'message'=>'THE DATA YOU SEEKING IS NOT EXIST!!');
-			}
-			return array('status'=>'SUCCESS','message'=>array_chunk($productlist['message'], $ipp)[$pageNum-1]);
+			$query = 'SELECT * FROM product';
+			return $this->getProductsBySearch($ipp, $pageNum, $query, null);
 		}
 		
 		// Used to get all product.
 		// RETURN: array of all product inside
 		private function getAllProduct(){
 			$query = 'SELECT * FROM product';
-			$result = $this->runQuery($query);
+			return $this->getAllProductBySearch($query, null);
+		}
+		
+		private function getProductsBySearch($ipp, $pageNum, $query, $search){
+			$productlist = $this->getAllProductBySearch($query, $search);
+			if($productlist['status'] == "ERROR"){
+				return $productlist;
+			}
+			$this->numChunk = ceil(sizeof($productlist['message'])/$ipp);
+			if($pageNum > $this->numChunk){
+				return array('status'=>'ERROR', 'message'=>'THE DATA YOU SEEKING IS NOT EXIST!!');
+			}
+			return array('status'=>'SUCCESS','message'=>array_chunk($productlist['message'], $ipp)[$pageNum-1]);
+		
+		}
+		
+		private function getAllProductBySearch($query, $search){
+			$result = $this->runQuery($query, $search);
 			if($result['status'] == "ERROR"){
-				return result;
+				return $result;
 			}
 			$productlist = array();
 			foreach($result['message'] as $item){
@@ -109,6 +135,7 @@
 				array_push($productlist, $prod);
 			}
 			return array('status'=>'SUCCESS','message'=>$productlist);
+		
 		}
 	}
 ?>
