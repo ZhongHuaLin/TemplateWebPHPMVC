@@ -54,7 +54,7 @@
 			$productlist = BuilderFactory::create('productlist',array('plist'=>$products, 'vertical'=>false));
 			$productlist->draw();
 		if($numPage > 1){
-			$pagin = BuilderFactory::create('pagination',array('ipp'=>$this->ipp, 'pageNum'=>$this->pageNum, 'numOfPage'=>$numPage));
+			$pagin = BuilderFactory::create('pagination',array('ipp'=>$this->ipp, 'pageNum'=>$this->pageNum, 'numOfPage'=>$numPage, 'search'=>$this->search));
 			$pagin->draw();
 		}
 		}

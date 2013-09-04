@@ -9,7 +9,7 @@
 			switch($type)
 			{
 				case 'pagination':
-					return new PaginationBuilder($arguments['ipp'],$arguments['pageNum'],$arguments['numOfPage']);
+					return new PaginationBuilder($arguments['ipp'],$arguments['pageNum'],$arguments['numOfPage'],$arguments['search']);
 					break;
 				case 'productlist':
 					return new ProductListBuilder($arguments['plist'],$arguments['vertical']);
