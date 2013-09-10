@@ -14,7 +14,7 @@
 		public $numChunk;
 		
 		function __construct(){
-			$this->database = new DataBase('localhost', 'root', '', 'data');
+			$this->database = new DataBase('localhost', 'root', 'root', 'data');
 		}
 		
 		// Function overloading, when getData() function called
