@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 10, 2013 at 02:13 PM
+-- Generation Time: Sep 10, 2013 at 03:19 PM
 -- Server version: 5.5.29
 -- PHP Version: 5.4.10
 
@@ -27,7 +27,14 @@ CREATE TABLE `picture` (
   PRIMARY KEY (`id`),
   KEY `ImageName` (`ImageName`),
   KEY `productName` (`productName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `picture`
+--
+
+INSERT INTO `picture` (`id`, `ImageName`, `productName`) VALUES
+(5, 'placeholder.png', 'productA');
 
 -- --------------------------------------------------------
 
@@ -91,10 +98,10 @@ INSERT INTO `typename` (`id`, `name`) VALUES
 -- Constraints for table `picture`
 --
 ALTER TABLE `picture`
-  ADD CONSTRAINT `picture_ibfk_2` FOREIGN KEY (`productName`) REFERENCES `product` (`name`) ON DELETE NO ACTION;
+  ADD CONSTRAINT `picture_ibfk_3` FOREIGN KEY (`productName`) REFERENCES `product` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`type`) REFERENCES `typename` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`type`) REFERENCES `typename` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
