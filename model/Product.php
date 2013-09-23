@@ -5,12 +5,14 @@
 		private $name;
 		private $type;
 		private $description;
+		private $pics;
 		
-		function __construct($id, $name, $type, $description){
+		function __construct($id, $name, $type, $description, $picarray){
 			$this->id = $id;
 			$this->name = $name;
 			$this->type = new productType($type);
 			$this->description = $description;
+			$this->pics = $picarray;
 		}
 		
 		public function getId(){
@@ -27,6 +29,10 @@
 		
 		public function getDescript(){
 			return $this->description;
+		}
+
+		public function getPicArray(){
+			return $this->pics;
 		}
 	}
 

@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"pull",
+				"pull-left"
+			],
+			[
+				"hr",
+				"href"
+			],
+			[
 				"fon",
 				"font-size"
 			],
@@ -20,6 +28,22 @@
 			"settings":
 			{
 				"buffer_size": 4156,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "data.sql",
+			"settings":
+			{
+				"buffer_size": 2466,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "view/ProductListBuilder.php",
+			"settings":
+			{
+				"buffer_size": 906,
 				"line_ending": "Unix"
 			}
 		}
@@ -111,7 +135,62 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 149.0,
+						"translation.y": 1691.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "data.sql",
+					"settings":
+					{
+						"buffer_size": 2466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2466,
+								2466
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "view/ProductListBuilder.php",
+					"settings":
+					{
+						"buffer_size": 906,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								509,
+								509
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 15.0,
+						"translation.y": 101.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

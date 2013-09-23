@@ -51,7 +51,7 @@
 		
 		<?php
 		include_once('BuilderFactory.php');
-		if($from == 'home'){
+		if($from == 'home'){	
 			$productlist = BuilderFactory::create('productlist',array('plist'=>$products, 'vertical'=>false));
 			$productlist->draw();
 		if($numPage > 1){

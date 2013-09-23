@@ -131,9 +131,15 @@
 			}
 			$productlist = array();
 			foreach($result['message'] as $item){
-				$prod = new Product($item["id"], $item["name"],$item["type"],$item["description"]);
+				$newquery = "SELECT * FROM picture WHERE productName = :search";
+				$newsearch = array(':search'=>$item["name"]);
+				$pics = $this->runQuery($newquery, $newsearch);
+				if($pics['status']=="ERROR") $pics['message']=null;
+				$prod = new Product($item["id"], $item["name"],$item["type"],$item["description"],$pics['message']);
 				array_push($productlist, $prod);
 			}
+
+			//	exit(var_dump($productlist));
 			return array('status'=>'SUCCESS','message'=>$productlist);
 		
 		}

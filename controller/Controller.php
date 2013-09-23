@@ -31,6 +31,7 @@
 					$result = $this->model->getData('PartialProductSearch', $this->ipp, $this->pageNum, $this->search);
 					if($result['status'] == 'ERROR') exit($result['status'].": ".$result['message']);
 					$products = $result['message'];
+					//exit(var_dump($products));
 					$numPage = $this->model->numChunk;
 					break;
 			}
